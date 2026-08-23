@@ -1,15 +1,22 @@
 const express = require("express");
 const path = require("path");
-const { connectMongoDb } = require("./db")
+const cookieParser = require("cookie-parser")
+const { connectMongoDb } = require("./db")      //Db connection
+const URL = require("./models/url");
+const { restrictToLoggedInUserOnly, checkAuth } = require("./middlewares/auth");
+
+//Routes 
 const urlRoute = require("./routes/url")
 const staticRoute = require("./routes/staticRouter")
-const URL = require("./models/url");
+const userRoute = require("./routes/user")
+
 
 const app = express();
 const PORT = 8001;
 
 //Middleware
 app.use(express.json());  // parse JSON bodies
+app.use(cookieParser());  //Cookie Parser 
 app.use(express.urlencoded({ extended: false }));
 
 //connect ejs
@@ -21,10 +28,11 @@ connectMongoDb("mongodb://127.0.0.1:27017/short-url").then(() =>
     console.log("MongoDB Connected")
 );
 
-//staticRoute
-app.use("/", staticRoute);
-//urlRoute
-app.use("/url", urlRoute);
+
+app.use("/", checkAuth, staticRoute);          //staticRoute
+app.use("/url", restrictToLoggedInUserOnly, urlRoute);              //urlRoute
+app.use("/user", userRoute);            //userRoute
+
 
 
 
