@@ -3,7 +3,7 @@ const path = require("path");
 const cookieParser = require("cookie-parser")
 const { connectMongoDb } = require("./db")      //Db connection
 const URL = require("./models/url");
-const { restrictToLoggedInUserOnly, checkAuth } = require("./middlewares/auth");
+const { checkForAuthentication, restrictTo } = require("./middlewares/auth");
 
 //Routes 
 const urlRoute = require("./routes/url")
@@ -28,9 +28,9 @@ connectMongoDb("mongodb://127.0.0.1:27017/short-url").then(() =>
     console.log("MongoDB Connected")
 );
 
-
-app.use("/", checkAuth, staticRoute);          //staticRoute
-app.use("/url", restrictToLoggedInUserOnly, urlRoute);              //urlRoute
+app.use(checkForAuthentication);
+app.use("/", staticRoute);          //staticRoute
+app.use("/url", restrictTo(["NORMAL"]), urlRoute);              //urlRoute
 app.use("/user", userRoute);            //userRoute
 
 
