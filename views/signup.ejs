@@ -1,26 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SignUp</title>
-    <style>
-        body{
-            font-family: "Segoe UI";
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up — Snip</title>
+  <meta name="description" content="Create a Snip account to start optimizing and tracking your shortened links in seconds.">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/auth.css">
 </head>
-<body>
-    <h1>Sign Up</h1>
-    <form action="/user" method="POST">
-        <label>Full Name</label>
-        <input type="text" required name="name">
-        <label>Email</label>
-        <input type="text" required name="email">
-        <label>Password</label>
-        <input type="text" required name="password">
+<body class="auth-page">
 
-        <button type="submit" >SignUp</button>
+  <!-- ── Top Accent Bar (Design.md §3.2) ── -->
+  <div class="auth-top-bar"></div>
+
+  <!-- ── Centered Card ── -->
+  <main class="auth-card auth-card-clean">
+    
+    <!-- Header (Left Aligned) -->
+    <header class="auth-header-left">
+      <h1 class="auth-title">Create an account</h1>
+      <p class="auth-subtitle">Start optimizing your links in seconds.</p>
+    </header>
+
+    <!-- Sign Up Form -->
+    <form action="/user" method="POST" class="auth-form">
+      <div class="form-group">
+        <label class="auth-label" for="name">FULL NAME</label>
+        <input
+          id="name"
+          type="text"
+          name="name"
+          placeholder="Jane Doe"
+          class="input-plain"
+          required
+          autocomplete="name"
+        />
+      </div>
+
+      <div class="form-group">
+        <label class="auth-label" for="email">EMAIL ADDRESS</label>
+        <input
+          id="email"
+          type="email"
+          name="email"
+          placeholder="jane@example.com"
+          class="input-plain"
+          required
+          autocomplete="email"
+        />
+      </div>
+
+      <div class="form-group">
+        <label class="auth-label" for="password">PASSWORD</label>
+        <input
+          id="password"
+          type="password"
+          name="password"
+          placeholder="••••••••"
+          class="input-plain"
+          required
+          autocomplete="new-password"
+        />
+        <span class="form-helper-text">Must be at least 8 characters.</span>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-auth">CREATE ACCOUNT →</button>
     </form>
+
+    <!-- Divider -->
+    <hr class="auth-divider">
+
+    <!-- Footer Link -->
+    <footer class="auth-footer">
+      Already have an account? <a href="/login" class="auth-link">Log in</a>
+    </footer>
+
+  </main>
+
 </body>
 </html>

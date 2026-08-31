@@ -2,6 +2,17 @@
    Snip — Design System: Auth Pages (Sign Up & Login)
    ========================================================================== */
 
+/* ── Top Gradient Bar (Design.md §3.2) ── */
+.auth-top-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, #22C55E 0%, #16A34A 50%, #22C55E 100%);
+  z-index: 100;
+}
+
 /* ── Page Wrapper (Design.md §3.2, §3.3 & §4.1) ── */
 .auth-page {
   min-height: 100vh;
@@ -9,8 +20,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 32px 16px;
+  padding: 40px 16px;
   width: 100%;
+  position: relative;
 }
 
 /* ── Auth Card Structure (Design.md §3.3, §4.3 & §5) ── */
@@ -20,18 +32,30 @@
   background-color: #FFFFFF;
   padding: 48px 40px;
   border-radius: var(--radius-lg);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
 }
 
 /* Login-specific solid black border variant */
 .auth-card-boxed {
   border: 1.5px solid var(--color-border);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
-/* ── Header & Titles (Design.md §3.3 & §4.2) ── */
+/* Sign Up lighter/borderless variant */
+.auth-card-clean {
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+}
+
+/* ── Header & Titles (Design.md §3.2, §3.3 & §4.2) ── */
 .auth-header {
   text-align: center;
   margin-bottom: 32px;
+}
+
+.auth-header-left {
+  text-align: left;
+  margin-bottom: 28px;
 }
 
 .auth-wordmark {
@@ -41,6 +65,15 @@
   color: var(--color-text);
   margin-bottom: 10px;
   line-height: 1;
+}
+
+.auth-title {
+  font-size: clamp(26px, 3.5vw, 32px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--color-text);
+  margin-bottom: 8px;
+  line-height: 1.2;
 }
 
 .auth-subtitle {
@@ -70,6 +103,40 @@
   color: var(--color-text);
 }
 
+/* Plain input (no icon prefix, used on Sign Up) */
+.input-plain {
+  width: 100%;
+  height: 48px;
+  background-color: #FFFFFF;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 0 16px;
+  font-size: 15px;
+  color: var(--color-text);
+  font-family: inherit;
+  font-weight: 500;
+  outline: none;
+  transition: border-color var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.input-plain:focus {
+  border-color: var(--color-border);
+  box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.25);
+}
+
+.input-plain::placeholder {
+  color: var(--color-text-muted);
+  font-weight: 400;
+}
+
+/* Helper / Validation text (Design.md §3.2 & §4.1) */
+.form-helper-text {
+  font-size: 12px;
+  color: var(--color-warning);
+  font-weight: 600;
+  margin-top: 2px;
+}
+
 /* Full-width submit button */
 .btn-auth {
   width: 100%;
@@ -77,7 +144,7 @@
   margin-top: 4px;
 }
 
-/* ── Divider & Footer (Design.md §3.3) ── */
+/* ── Divider & Footer (Design.md §3.2 & §3.3) ── */
 .auth-divider {
   border: none;
   border-top: 1px solid var(--color-border-light);
@@ -123,7 +190,7 @@
 
 @media (max-width: 640px) {
   .auth-page {
-    padding: 20px 16px;
+    padding: 24px 16px;
   }
 
   .auth-card {
@@ -133,6 +200,10 @@
 
   .auth-wordmark {
     font-size: 30px;
+  }
+
+  .auth-title {
+    font-size: 26px;
   }
 
   .auth-subtitle {
