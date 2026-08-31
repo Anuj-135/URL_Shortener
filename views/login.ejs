@@ -1,24 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Log-In</title>
-    <style>
-        body{
-            font-family: "Segoe UI";
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login — Snip</title>
+  <meta name="description" content="Log in to your Snip account to manage and track your shortened URLs.">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/auth.css">
 </head>
-<body>
-    <h1>Login</h1>
-    <form action="/user/login" method="POST">
-        <label>Email</label>
-        <input type="text" required name="email">
-        <label>Password</label>
-        <input type="text" required name="password">
-        <button type="submit" >Login</button>
-        
+<body class="auth-page">
+
+  <main class="auth-card auth-card-boxed">
+    <!-- Header -->
+    
+
+    <!-- Error Banner (if any) -->
+    <% if (locals.error) { %>
+    <div class="auth-error" role="alert">
+      <%= error %>
+    </div>
+    <% } %>
+
+    <!-- Login Form -->
+    <form action="/user/login" method="POST" class="auth-form">
+      <div class="form-group">
+        <label class="auth-label" for="email">EMAIL ADDRESS</label>
+        <div class="input-wrapper">
+          <img src="/images/email.svg" alt="Email Icon" class="input-icon">
+          <input
+            id="email"
+            type="email"
+            name="email"
+            placeholder="name@company.com"
+            class="form-input"
+            required
+            autocomplete="email"
+          />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="auth-label" for="password">PASSWORD</label>
+        <div class="input-wrapper">
+          <img src="/images/password.svg" alt="Password Icon" class="input-icon">
+          <input
+            id="password"
+            type="password"
+            name="password"
+            placeholder="••••••••"
+            class="form-input"
+            required
+            autocomplete="current-password"
+          />
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-auth">LOGIN</button>
     </form>
+
+    <!-- Divider -->
+    <hr class="auth-divider">
+
+    <!-- Footer link -->
+    <footer class="auth-footer">
+      Don't have an account? <a href="/signup" class="auth-link">Sign up</a>
+    </footer>
+  </main>
+
 </body>
 </html>

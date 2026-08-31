@@ -18,6 +18,8 @@ const PORT = 8001;
 app.use(express.json());  // parse JSON bodies
 app.use(cookieParser());  //Cookie Parser 
 app.use(express.urlencoded({ extended: false }));
+app.use(express.static(path.resolve("./public")));
+app.use("/images", express.static(path.resolve("./images")));
 
 //connect ejs
 app.set("view engine", "ejs");
