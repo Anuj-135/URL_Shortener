@@ -1,9 +1,14 @@
 const URL = require("../models/url");
 const { nanoid } = require("nanoid");
+const { validationResult } = require("express-validator");
 
 async function handleGenerateNewShortURL(req, res) {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ error: errors.array()[0].msg });
+    }
+
     const body = req.body;
-    if (!body.url) return res.status(400).json({ error: "url is required" });
     const shortID = nanoid(8);
 
     await URL.create({
@@ -12,8 +17,7 @@ async function handleGenerateNewShortURL(req, res) {
         visitHistory: [],
         createdBy: req.user._id,
     });
-    //  const allUrls = await URL.find({});
-    // return res.render("home", { urls: allUrls, id: shortID });
+
     return res.redirect(`/?id=${shortID}`);
 }
 
@@ -21,16 +25,16 @@ async function handleGetAnalytics(req, res) {
     const shortId = req.params.shortId;
     const result = await URL.findOne({ shortId });
 
-    if (!result) {                   //Null check
+    if (!result) { // Null check
         return res.status(404).json({ error: "Short URL not found" });
     }
     return res.json({
         totalClicks: result.visitHistory.length,
         analytics: result.visitHistory,
-    })
+    });
 }
 
 module.exports = {
     handleGenerateNewShortURL,
     handleGetAnalytics,
-}
+};

@@ -24,6 +24,12 @@
     </header>
 
     <!-- Sign Up Form -->
+    <% if (locals.error) { %>
+    <div class="auth-error" role="alert">
+      <%= error %>
+    </div>
+    <% } %>
+
     <form action="/user" method="POST" class="auth-form">
       <div class="form-group">
         <label class="auth-label" for="name">FULL NAME</label>
